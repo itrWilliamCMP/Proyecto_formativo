@@ -1,1 +1,3 @@
 Perdón profesor, no alcance hacer las tablas normalizadas. 
+
+no se porque no se actualiza los datos, no le encontré el error, me guie con el otro crud de los tickets y lo compare y todo estaba igual refiriendo que si tendría que hacer los cambios.
