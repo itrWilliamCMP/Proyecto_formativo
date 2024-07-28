@@ -1,14 +1,19 @@
 package william.campos.suministro_de_medicamentos_a_pacientes
 
 import Modelo.ClaseConexion
+import Modelo.HABITACIONES
+import Modelo.MEDICAMENTOS
 import Modelo.PACIENTES
 import RecyclerViewHelpers.Adaptador
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +26,7 @@ import kotlinx.coroutines.withContext
 import java.util.UUID
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,16 +36,16 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+
         //mandar a llamar a todos los elementos de la pantalla
 
         val txtNOMBRES = findViewById<EditText>(R.id.txtNombresPacientes)
         val txtApellidos = findViewById<EditText>(R.id.txtApellidosPaciente)
         val txtEdad = findViewById<EditText>(R.id.txtEdadPacientes)
         val txtEnfermedad = findViewById<EditText>(R.id.txtEnfermedadPaciente)
-        val txtnumerohabitacion = findViewById<EditText>(R.id.txtNumeroHabitacion)
-        val txtnumerocama = findViewById<EditText>(R.id.txtNumeroCama)
-        val txtmedicamentoasignado = findViewById<EditText>(R.id.txtMedicamentoAsignado)
-        val txtHoraAplicacion = findViewById<EditText>(R.id.txtHoraAplicacion)
+
         val btnAgregar = findViewById<Button>(R.id.btnAgregar)
 
         fun limpiar(){
@@ -47,10 +53,6 @@ class MainActivity : AppCompatActivity() {
             txtApellidos.setText("")
             txtEdad.setText("")
             txtEnfermedad.setText("")
-            txtnumerohabitacion.setText("")
-            txtnumerocama.setText("")
-            txtmedicamentoasignado.setText("")
-            txtHoraAplicacion.setText("")
         }
 
         ////////////////////////////////TODO:mostrar datos ////////////////////////
@@ -61,32 +63,46 @@ class MainActivity : AppCompatActivity() {
 
         rcvPacientes.layoutManager= LinearLayoutManager(this)
 
+
+
         //funcion para obtener datos
         fun obtenerDatos():List<PACIENTES>{
             val objConexion= ClaseConexion().cadenaConexion()
 
             val statement = objConexion?.createStatement()
-            val resultSet = statement?.executeQuery("select * from PACIENTES")!!
+            val resultSet = statement?.executeQuery("select p.*,h.numero_habitacion,h.numero_cama from PACIENTES p " +
+                    " left join HABITACIONES h on p.id_paciente=h.id_paciente")!!
 
             val Pacientes = mutableListOf<PACIENTES>()
 
+            Pacientes.clear()
+
             while (resultSet.next()){
-                val uuid = resultSet.getString("uuid")
-                val NOMBRES = resultSet.getString("NOMBRES")
-                val APELLIDOS = resultSet.getString("APELLIDOS")
-                val EDAD = resultSet.getInt("EDAD")
-                val ENFERMEDAD = resultSet.getString("ENFERMEDAD")
-                val NUMEROHABITACION = resultSet.getInt("NUMEROHABITACION")
-                val NUMEROCAMA = resultSet.getInt("NUMEROCAMA")
-                val MEDICAMENTOASIGNADOS = resultSet.getString("MEDICAMENTOASIGNADOS")
-                val HORAAPLICACION= resultSet.getString("HORAAPLICACION")
+                val id_paciente = resultSet.getInt("id_paciente")
+                val nombres = resultSet.getString("nombres")
+                val apellidos = resultSet.getString("apellidos")
+                val edad = resultSet.getInt("edad")
+                val enfermedad = resultSet.getString("enfermedad")
+                var numero_habitacion = resultSet.getInt("numero_habitacion")
+                var numero_cama = resultSet.getInt("numero_cama")
 
+                Log.v("datos",id_paciente.toString()+" "+nombres+" "+apellidos+" "+edad+" "+enfermedad+" "+numero_habitacion+" "+numero_cama)
 
-                val paciente = PACIENTES(uuid,NOMBRES,APELLIDOS,EDAD,ENFERMEDAD,NUMEROHABITACION,NUMEROCAMA,MEDICAMENTOASIGNADOS,HORAAPLICACION)
+                if (numero_habitacion == null) {
+                    numero_habitacion = 0
+                }
+                if (numero_cama == null) {
+                    numero_cama = 0
+                }
+
+                val paciente = PACIENTES(id_paciente,nombres,apellidos,edad,enfermedad,numero_habitacion,numero_cama)
                 Pacientes.add(paciente)
             }
             return Pacientes
         }
+
+
+
 
         //asignar un adaptador
 
@@ -97,38 +113,39 @@ class MainActivity : AppCompatActivity() {
                 rcvPacientes.adapter=miAdapter
             }
         }
-        ///////////////////////////////// TODO:GUARDAR Pacientes////////////////////////////////////
+
+
+        ///////////////////////////////// TODO:GUARDAR Datos////////////////////////////////////
         // programar el boton
         btnAgregar.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO){
-
                 //guardar datos
-
-                //crear un objeto de la clase conexion
                 val claseConexion= ClaseConexion().cadenaConexion()
 
-                //crar una variable que contenga un preparedstatement
-
-                val addPacientes =claseConexion?.prepareStatement("insert into PACIENTES (uuid ,NOMBRES,APELLIDOS,EDAD,ENFERMEDAD,NUMEROHABITACION,NUMEROCAMA,MEDICAMENTOASIGNADOS,HORAAPLICACION)values(?,?,?,?,?,?,?,?,?)")!!
-
-                addPacientes.setString(1, UUID.randomUUID().toString())
-                addPacientes.setString(2,txtNOMBRES.text.toString())
-                addPacientes.setString(3,txtApellidos.text.toString())
-                addPacientes.setInt(4,txtEdad.text.toString().toInt())
-                addPacientes.setString(5,txtEnfermedad.text.toString())
-                addPacientes.setInt(6,txtnumerohabitacion.text.toString().toInt())
-                addPacientes.setInt(7,txtnumerocama.text.toString().toInt())
-                addPacientes.setString(8,txtmedicamentoasignado.text.toString())
-                addPacientes.setString(9,txtHoraAplicacion.text.toString())
+                // 1. Insertar en PACIENTES
+                val addPacientes =claseConexion?.prepareStatement("INSERT INTO PACIENTES (nombres, apellidos, edad, enfermedad) VALUES (?,?,?,?)")!!
+                addPacientes.setString(1,txtNOMBRES.text.toString())
+                addPacientes.setString(2,txtApellidos.text.toString())
+                addPacientes.setInt(3,txtEdad.text.toString().toInt())
+                addPacientes.setString(4,txtEnfermedad.text.toString())
                 addPacientes.executeUpdate()
 
+
                 val nuevosPacientes=obtenerDatos()
+
 
                 withContext(Dispatchers.Main){
                     (rcvPacientes.adapter as? Adaptador)?.actualizarLista(nuevosPacientes)
                 }
+
+
             }
         }
-
     }
 }
+
+
+
+
+
+

@@ -22,35 +22,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.301" />
 
-    <EditText
-        android:id="@+id/txtNUMEROCAMADETALLE"
-        android:layout_width="264dp"
-        android:layout_height="26dp"
-        android:background="@drawable/cuadro_decorativo3"
-        android:ems="10"
-        android:inputType="text"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634" />
-
-    <EditText
-        android:id="@+id/txtMEDICAMENTOSDETALLE"
-        android:layout_width="264dp"
-        android:layout_height="26dp"
-        android:background="@drawable/cuadro_decorativo3"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.712" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="289dp"
@@ -63,35 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
-
-    <EditText
-        android:id="@+id/txtNUMEROHABITACIONDETALLE"
-        android:layout_width="264dp"
-        android:layout_height="26dp"
-        android:background="@drawable/cuadro_decorativo3"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
-
-    <EditText
-        android:id="@+id/txtHORAAPLICACIONDETALLE"
-        android:layout_width="264dp"
-        android:layout_height="26dp"
-        android:background="@drawable/cuadro_decorativo3"
-        android:ems="10"
-        android:inputType="text"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.798" />
 
     <EditText
         android:id="@+id/txtEDADDetalle"
@@ -146,20 +88,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.467" />
 
-    <TextView
-        android:id="@+id/txtUUIDDetalle"
-        android:layout_width="263dp"
-        android:layout_height="29dp"
-        android:background="@drawable/cuadro_decorativo3"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.148" />
-
     <ImageView
         android:id="@+id/imgRegreso"
         android:layout_width="50dp"
@@ -172,4 +100,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@drawable/ic_atras" />
+
+    <Spinner
+        android:id="@+id/spMedicamentos"
+        android:layout_width="279dp"
+        android:layout_height="29dp"
+        android:popupBackground="@drawable/cuadro_decorativo3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.752" />
+
+    <TextView
+        android:id="@+id/txtid_paciente"
+        android:layout_width="72dp"
+        android:layout_height="28dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.127" />
 </androidx.constraintlayout.widget.ConstraintLayout>

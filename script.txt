@@ -1,23 +1,76 @@
+----------------------------------Nota-----------------------------------------------------------------------
+Hola Profe, por lo que le entendí para la entrega de esta aplicación, esto es mi entrega, cualquier duda me dice
+----------------------------------------------------------------------------------------------------------------------
+
+
 CREATE TABLE USUARIOS2ProyectoFormativo(
 UUID_Usuario VARCHAR2(50) PRIMARY KEY,
 correoElectronico VARCHAR2(100) NOT NULL UNIQUE,
 contrasena VARCHAR2(255) NOT NULL
 );
 
-CREATE TABLE PACIENTES(
-UUID VARCHAR2(60),
-NOMBRES VARCHAR2(100),
-APELLIDOS VARCHAR2(100),
-EDAD INT,
-ENFERMEDAD VARCHAR2(150),
-NUMEROHABITACION INT,
-NUMEROCAMA INT,
-MEDICAMENTOASIGNADOS VARCHAR2(100),
-HORAAPLICACION VARCHAR2(100)
+
+CREATE TABLE PACIENTES (
+id_paciente NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+nombres VARCHAR2(100),
+apellidos VARCHAR2(100),
+edad INT,
+enfermedad VARCHAR2(150)
 );
 
-DROP TABLE USUARIOS2ProyectoFormativo
 
-select * from PACIENTES
+CREATE TABLE HABITACIONES (
+id_habitacion NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+id_paciente number,
+numero_habitacion INT,
+numero_cama INT,
+CONSTRAINT FK_id_paciente_habitacion FOREIGN KEY (id_paciente) REFERENCES PACIENTES(id_paciente)
+);
 
-Select * From USUARIOS2ProyectoFormativo
+
+CREATE TABLE MEDICAMENTOS (
+id_medicamento NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+medicamento_asignado VARCHAR2(100),
+hora_aplicacion VARCHAR2(150)
+);
+
+
+CREATE TABLE PACIENTES_MEDICAMENTOS (
+id_pacientemedicamento NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+id_paciente number,
+id_medicamento number,
+CONSTRAINT FK_id_paciente_medicamento FOREIGN KEY (id_paciente) REFERENCES PACIENTES(id_paciente),
+CONSTRAINT FK_id_medicamento_paciente FOREIGN KEY (id_medicamento) REFERENCES MEDICAMENTOS(id_medicamento)
+);
+
+
+insert into PACIENTES(nombres, apellidos, edad, enfermedad) values ('William Alexander', 'Campos Reyes', 17, 'Ezquisofrenia');
+insert into PACIENTES(nombres, apellidos, edad, enfermedad) values ('Carlos Antonio', 'Campos Reyes', 24, 'Dolor de pansa');
+insert into PACIENTES(nombres, apellidos, edad, enfermedad) values ('Maria Jose', 'Torres Castro', 27, 'Dolor de cabeza');
+insert into HABITACIONES(numero_habitacion, numero_cama, id_paciente) values (10, 2, 1);
+insert into HABITACIONES(numero_habitacion, numero_cama, id_paciente) values (11, 3, 2);
+insert into HABITACIONES(numero_habitacion, numero_cama, id_paciente) values (12, 4, 3);
+insert into MEDICAMENTOS(medicamento_asignado, hora_aplicacion) values ('pastillas', 'Despues de cada comida');
+insert into MEDICAMENTOS(medicamento_asignado, hora_aplicacion) values ('Anaflat', 'Despues de cada 3 horas');
+insert into MEDICAMENTOS(medicamento_asignado, hora_aplicacion) values ('Certal', 'cada 5 horas');
+insert into MEDICAMENTOS(medicamento_asignado, hora_aplicacion) values ('Vitamina A', 'cada 1 hora');
+
+insert into pacientes_medicamentos (id_paciente,id_medicamento) values (1,1);
+insert into pacientes_medicamentos (id_paciente,id_medicamento) values (1,2);
+insert into pacientes_medicamentos (id_paciente,id_medicamento) values (1,3);
+
+
+
+
+
+select * from PACIENTES;
+
+
+select * from PACIENTES_MEDICAMENTOS
+COMMIT
+
+
+
+
+
+

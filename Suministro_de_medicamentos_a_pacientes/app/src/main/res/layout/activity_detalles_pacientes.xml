@@ -8,6 +8,19 @@
     android:background="@drawable/cuadro_decorativo2"
     tools:context=".DetallesPacientes">
 
+    <Spinner
+        android:id="@+id/spMedicamentos"
+        android:layout_width="329dp"
+        android:layout_height="33dp"
+        android:background="@drawable/cuadro_decorativo3"
+        android:popupBackground="@drawable/cuadro_decorativo3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="291dp"
@@ -117,34 +130,6 @@
         app:srcCompat="@drawable/ic_atras" />
 
     <TextView
-        android:id="@+id/txtUUIDDetalle"
-        android:layout_width="264dp"
-        android:layout_height="26dp"
-        android:background="@drawable/cuadro_decorativo3"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.148" />
-
-    <TextView
-        android:id="@+id/txtMEDICAMENTOSDETALLE"
-        android:layout_width="264dp"
-        android:layout_height="26dp"
-        android:background="@drawable/cuadro_decorativo3"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
-
-    <TextView
         android:id="@+id/txtHORAAPLICACIONDETALLE"
         android:layout_width="264dp"
         android:layout_height="26dp"
@@ -153,8 +138,22 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.712" />
+        app:layout_constraintVertical_bias="0.787" />
+
+    <TextView
+        android:id="@+id/txtid_pacientedetalle"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
+        android:background="@drawable/cuadro_decorativo3"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
 </androidx.constraintlayout.widget.ConstraintLayout>
