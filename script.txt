@@ -1,8 +1,6 @@
 ----------------------------------Nota-----------------------------------------------------------------------
 Hola Profe, por lo que le entendí para la entrega de esta aplicación, esto es mi entrega, cualquier duda me dice
 ----------------------------------------------------------------------------------------------------------------------
-
-
 CREATE TABLE USUARIOS2ProyectoFormativo(
 UUID_Usuario VARCHAR2(50) PRIMARY KEY,
 correoElectronico VARCHAR2(100) NOT NULL UNIQUE,
@@ -47,30 +45,23 @@ CONSTRAINT FK_id_medicamento_paciente FOREIGN KEY (id_medicamento) REFERENCES ME
 insert into PACIENTES(nombres, apellidos, edad, enfermedad) values ('William Alexander', 'Campos Reyes', 17, 'Ezquisofrenia');
 insert into PACIENTES(nombres, apellidos, edad, enfermedad) values ('Carlos Antonio', 'Campos Reyes', 24, 'Dolor de pansa');
 insert into PACIENTES(nombres, apellidos, edad, enfermedad) values ('Maria Jose', 'Torres Castro', 27, 'Dolor de cabeza');
+
 insert into HABITACIONES(numero_habitacion, numero_cama, id_paciente) values (10, 2, 1);
 insert into HABITACIONES(numero_habitacion, numero_cama, id_paciente) values (11, 3, 2);
 insert into HABITACIONES(numero_habitacion, numero_cama, id_paciente) values (12, 4, 3);
+
 insert into MEDICAMENTOS(medicamento_asignado, hora_aplicacion) values ('pastillas', 'Despues de cada comida');
 insert into MEDICAMENTOS(medicamento_asignado, hora_aplicacion) values ('Anaflat', 'Despues de cada 3 horas');
 insert into MEDICAMENTOS(medicamento_asignado, hora_aplicacion) values ('Certal', 'cada 5 horas');
 insert into MEDICAMENTOS(medicamento_asignado, hora_aplicacion) values ('Vitamina A', 'cada 1 hora');
 
 insert into pacientes_medicamentos (id_paciente,id_medicamento) values (1,1);
-insert into pacientes_medicamentos (id_paciente,id_medicamento) values (1,2);
-insert into pacientes_medicamentos (id_paciente,id_medicamento) values (1,3);
+insert into pacientes_medicamentos (id_paciente,id_medicamento) values (2,2);
+insert into pacientes_medicamentos (id_paciente,id_medicamento) values (3,3);
 
 
 
-
-
-select * from PACIENTES;
-
-
-select * from PACIENTES_MEDICAMENTOS
-COMMIT
-
-
-
+COMMIT;
 
 
 
